@@ -73,8 +73,6 @@ void printGrid(int ** grid, int size){
 }
 
 int main(){
-    struct timeval inicio, final;
-    gettimeofday(&inicio, NULL);
     int i, j, ** grid, ** newGrid;
     grid = malloc(N * sizeof(int *));
     newGrid = malloc(N * sizeof(int *));
@@ -144,7 +142,7 @@ int main(){
     int aliveSum = 0;
     for(i=0;i<noTh;i++)
         aliveSum+=alive[i];
-    end = omp_get_wtime();
+    end = omp_get_wtime();\
     printf("Took %f seconds.\n", end-start);
     free(alive);
 
@@ -154,10 +152,5 @@ int main(){
     }
     free(grid);
     free(newGrid);
-
-    gettimeofday(&final, NULL);
-    int tmili = (int) (1000 * (final.tv_sec - inicio.tv_sec) + (final.tv_usec - inicio.tv_usec) / 1000);
-    printf("tempo decorrido: %d milisegundos\n", tmili);
-
     return 0;
 }

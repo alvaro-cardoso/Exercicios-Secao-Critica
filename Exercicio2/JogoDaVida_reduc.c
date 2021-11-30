@@ -73,8 +73,6 @@ void printGrid(int ** grid, int size){
 }
 
 int main(){
-    struct timeval inicio, final;
-    gettimeofday(&inicio, NULL);
     int i, j, ** grid, ** newGrid;
     grid = malloc(N * sizeof(int *));
     newGrid = malloc(N * sizeof(int *));
@@ -132,7 +130,7 @@ int main(){
     }
 
     int alive = 0;
-    omp_set_num_threads(8);
+    omp_set_num_threads(1);
     start = omp_get_wtime();
     #pragma omp parallel for private(i,j) reduction(+:alive)
     for(i = 0; i < N; i++){
@@ -149,10 +147,5 @@ int main(){
     }
     free(grid);
     free(newGrid);
-
-    gettimeofday(&final, NULL);
-    int tmili = (int) (1000 * (final.tv_sec - inicio.tv_sec) + (final.tv_usec - inicio.tv_usec) / 1000);
-    printf("tempo decorrido: %d milisegundos\n", tmili);
-
     return 0;
 }

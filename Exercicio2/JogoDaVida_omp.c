@@ -99,7 +99,7 @@ int main(){
 
     double start, end;
 
-    omp_set_num_threads(6);
+    omp_set_num_threads(8);
     for(int g = 0; g < T; g++){
         int neighborAlive, local;
         #pragma omp parallel for private(i,j,neighborAlive)
@@ -130,7 +130,7 @@ int main(){
     }
 
     int alive = 0;
-    omp_set_num_threads(2);
+    omp_set_num_threads(1);
     start = omp_get_wtime();
     #pragma omp parallel for private(i,j) shared(alive)
     for(i = 0; i < N; i++){
